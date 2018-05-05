@@ -8,25 +8,48 @@ namespace DVR
 {
     class Router
     {
-        RoutingTable routingTable = new RoutingTable();
+        public List<Router> networkRouters;
+        public int[,] routingTable = new int[100, 100];
         public int id;
         public string data;
 
-        public void DisplayRoutingTable()
+        public Router(List<Router> routers)
         {
-            for (int i = 0; i < routingTable.table.GetLength(0); i++)
+            networkRouters = routers;
+        }
+
+        public void DisplayRoutingTable(int routersCount)
+        {
+            Console.WriteLine("My ID: " + id + "\n");
+
+            for (int i = 0; i < routersCount; i++)
             {
-                for (int j = 0; j < routingTable.table.GetLength(1) ; j++ )
+                for (int j = 0; j < routersCount ; j++ )
                 {
-                    Console.WriteLine(routingTable.table[i][j] + "    ");
+                    Console.Write(routingTable[i,j] + "\t");
                 }
                 Console.WriteLine();
             }
         }
 
-        public void InitRoutingTable()
+        public void SendMessage(Message message)
         {
+            if (message.hops > 0)
+            {
+                message.hops--;
+                if (message.reciever == id)
+                {
+                    Console.WriteLine("I got the message " + message.message);
+                }
+                else
+                {
 
+                }
+            }
+            else
+            {
+                Console.WriteLine("Too many hops, by by message");
+            }
         }
     }
 }

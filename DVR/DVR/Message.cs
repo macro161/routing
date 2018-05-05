@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace DVR
 {
-    class Computer
+    class Message
     {
+        public int id = new Random().Next(1000000) + 1;
+        public int reciever;
         public string message;
-        public string routerId;
-        public string computerId;
-
-        public void SendMessage()
-        {
-
-        }
+        public int hops = 10;
     }
 }

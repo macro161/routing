@@ -27,6 +27,8 @@ namespace DVR
                 Console.WriteLine("6. Add router");
                 Console.WriteLine("7. Display Via and Distance tables");
                 Console.WriteLine("8. Sharing table");
+                Console.WriteLine("9. Compute and display last table");
+                Console.WriteLine("10. Display routers routing tables");
 
                 switch (Console.ReadLine())
                 {
@@ -37,6 +39,7 @@ namespace DVR
                         RemoveRouter();
                         break;
                     case "3":
+                        SendMessage();
                         break;
                     case "4":
                         break;
@@ -62,12 +65,34 @@ namespace DVR
                         ComputeFinalTable();
                         DisplayFinalTable();
                         break;
+                    case "10":
+                        DisplayRouterRoutingTables();
+                        break;
                     default:
                         Console.WriteLine("Bad input");
-                        break;
-                    
+                        break;    
                 }
+            }
+        }
 
+        private void SendMessage()
+        {
+            int sender;
+            int reciever;
+
+            Console.WriteLine("Enter sender's ID: ");
+            sender = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Enter reciever's ID: ");
+            reciever = Int32.Parse(Console.ReadLine());
+
+        }
+
+        private void DisplayRouterRoutingTables()
+        {
+            for (int i = 0; i < routersNumber; i++ )
+            {
+                networkRouters[i].DisplayRoutingTable(routersNumber);
+                Console.WriteLine();
             }
         }
 
@@ -82,10 +107,20 @@ namespace DVR
                 for (int j = 0; j < routersNumber; j++)
                 {
                     Console.Write("\n" + networkRouters[j].id.ToString() +   "\t" + finalTable[i,j] + "\t");
-                    if (i == via[i,j])
+                    networkRouters[i].routingTable[j, 0] = networkRouters[j].id;
+                    networkRouters[i].routingTable[j, 1] = finalTable[i, j];
+
+                    if (i == via[i, j])
+                    {
                         Console.Write("-");
+                        networkRouters[i].routingTable[j, 2] = 0;
+                    }
                     else
-                        Console.Write(networkRouters[via[i,j]].id.ToString());
+                    {
+                        Console.Write(networkRouters[via[i, j]].id.ToString());
+                        networkRouters[i].routingTable[j, 2] = networkRouters[via[i, j]].id;
+                    }
+                        
                 }
             }
 
@@ -172,7 +207,6 @@ namespace DVR
             }
         }
 
-
         private void InitNetwork() {
             Console.WriteLine("How many routers do you want in network: ");
             routersNumber = Int32.Parse(Console.ReadLine());
@@ -194,7 +228,7 @@ namespace DVR
 
         private void CreateRouters() {
             for (int i = 0; i < routersNumber; i++) {
-                Router newRouter = new Router();
+                Router newRouter = new Router(networkRouters);
                 newRouter.id = rnd.Next(90) + 10;
                 networkRouters.Add(newRouter);
             }
@@ -226,7 +260,7 @@ namespace DVR
 
         private void AddRouter()
         {
-            Router newRouter = new Router();
+            Router newRouter = new Router(networkRouters);
             newRouter.id = rnd.Next(90) + 10;
             networkRouters.Add(newRouter);
             edges[routersNumber + 1, 0] = newRouter.id;
