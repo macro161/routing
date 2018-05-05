@@ -1,0 +1,7 @@
+C:\Users\normie\Documents\GitHub\routing\DVR\DVR\bin\Debug\DVR.exe.config
+C:\Users\normie\Documents\GitHub\routing\DVR\DVR\bin\Debug\DVR.exe
+C:\Users\normie\Documents\GitHub\routing\DVR\DVR\bin\Debug\DVR.pdb
+C:\Users\normie\Documents\GitHub\routing\DVR\DVR\obj\Debug\DVR.csprojResolveAssemblyReference.cache
+C:\Users\normie\Documents\GitHub\routing\DVR\DVR\obj\Debug\DVR.csproj.CoreCompileInputs.cache
+C:\Users\normie\Documents\GitHub\routing\DVR\DVR\obj\Debug\DVR.exe
+C:\Users\normie\Documents\GitHub\routing\DVR\DVR\obj\Debug\DVR.pdb
