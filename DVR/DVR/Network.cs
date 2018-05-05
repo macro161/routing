@@ -79,11 +79,16 @@ namespace DVR
         {
             int sender;
             int reciever;
+            string message = "TEST";
 
             Console.WriteLine("Enter sender's ID: ");
             sender = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Enter reciever's ID: ");
             reciever = Int32.Parse(Console.ReadLine());
+
+            Message msg = new Message(reciever,message);
+
+            networkRouters[networkRouters.FindIndex(id => id.id == sender)].SendMessage(msg);
 
         }
 

@@ -12,5 +12,11 @@ namespace DVR
         public int reciever;
         public string message;
         public int hops = 10;
+
+        public Message(int rec, string msg)
+        {
+            reciever = rec;
+            message = msg;
+        }
     }
 }
