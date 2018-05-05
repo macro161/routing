@@ -98,7 +98,7 @@ namespace DVR
                 for (int j = 0; j < routersNumber; j++)
                 {
                     finalTable[i, j] = edges[i + 1, j + 1];
-                    via[i, j] = 1;
+                    via[i, j] = i;
 
                     for (int k = 0; k < routersNumber; k++)
                     {
@@ -117,11 +117,11 @@ namespace DVR
                         for (int k = 0; k < routersNumber; k++)
                         {
 
-                            if ((finalTable[i,k] != -1) && (finalTable[k,j] != -1))
+                            if ((finalTable[i,k] != 0) && (finalTable[k,j] != 0))
                             {
-                                if ((finalTable[i,j] == -1) || ((finalTable[i,j] != -1) && (finalTable[i,j] > finalTable[i,k] + finalTable[k,j])))
+                                if ((finalTable[i,j] == 0) || ((finalTable[i,j] != 0) && (finalTable[i,j] > (finalTable[i,k] + finalTable[k,j]))))
                                 {
-                                    if (finalTable[i,k] + finalTable[k,j] > -1)
+                                    if (finalTable[i,k] + finalTable[k,j] > 0)
                                     {
                                         finalTable[i,j] = finalTable[i,k] + finalTable[k,j];
                                         via[i,j] = k;
