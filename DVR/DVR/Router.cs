@@ -16,6 +16,7 @@ namespace DVR
         public Router(List<Router> routers)
         {
             networkRouters = routers;
+            Console.WriteLine("Im alaive");
         }
 
         public void DisplayRoutingTable(int routersCount)
@@ -45,20 +46,26 @@ namespace DVR
                 }
                 else
                 {
+                    Console.WriteLine("1");
+
                     int index = GetRouterIndex(message.reciever);
 
                     if (routingTable[index, 1] == 0)
                     {
                         SendToRandom(message);
+                        Console.WriteLine("2");
                     }
                     else
                     {
+                        Console.WriteLine("3");
                         if (routingTable[index, 1] != 0 && routingTable[index, 2] == 0)
                         {
+                            Console.WriteLine("4");
                             networkRouters[networkRouters.FindIndex(id => id.id == routingTable[index, 0])].SendMessage(message);
                         }
                         else
                         {
+                            Console.WriteLine("5");
                             networkRouters[networkRouters.FindIndex(id => id.id == routingTable[index,2])].SendMessage(message);
                         }
                        
@@ -68,6 +75,7 @@ namespace DVR
 
             else
             {
+                Console.WriteLine("6");
                 Console.WriteLine("Too many hops, by by message");
             }
         }

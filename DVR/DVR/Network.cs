@@ -37,11 +37,17 @@ namespace DVR
                         break;
                     case "2":
                         RemoveRouter();
+                        InitSharingTable();
+                        DisplaySharingTable();
+                        ComputeFinalTable();
+                        DisplayFinalTable();
+                        DisplayRouterRoutingTables();
                         break;
                     case "3":
                         SendMessage();
                         break;
                     case "4":
+                        RoutersDetails();
                         break;
                     case "5":
                         Console.WriteLine();
@@ -53,6 +59,12 @@ namespace DVR
                         break;
                     case "6":
                         AddRouter();
+                        DisplayDistVia();
+                        InitSharingTable();
+                        DisplaySharingTable();
+                        ComputeFinalTable();
+                        DisplayFinalTable();
+                        DisplayRouterRoutingTables();
                         break;
                     case "7":
                         DisplayDistVia();
@@ -71,6 +83,19 @@ namespace DVR
                     default:
                         Console.WriteLine("Bad input");
                         break;    
+                }
+            }
+        }
+
+        private void RoutersDetails()
+        {
+            for (int i = 0; i< routersNumber; i++ )
+            {
+                Console.WriteLine("//////////");
+
+                for (int j = 0; j < networkRouters[i].routingTable.GetLength(0) ; j++ )
+                {
+                    Console.WriteLine("\t" + networkRouters[i].routingTable[j,0] + "\t" + networkRouters[i].routingTable[j, 1] + "\t" + networkRouters[i].routingTable[j, 2]);
                 }
             }
         }
@@ -268,9 +293,9 @@ namespace DVR
             Router newRouter = new Router(networkRouters);
             newRouter.id = rnd.Next(90) + 10;
             networkRouters.Add(newRouter);
-            edges[routersNumber + 1, 0] = newRouter.id;
-            edges[0, routersNumber + 1] = newRouter.id;
             routersNumber++;
+            edges[routersNumber, 0] = newRouter.id;
+            edges[0, routersNumber] = newRouter.id;
             DisplayEdges();
         }
 
