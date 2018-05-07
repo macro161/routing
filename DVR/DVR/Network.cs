@@ -37,11 +37,7 @@ namespace DVR
                         break;
                     case "2":
                         RemoveRouter();
-                        InitSharingTable();
-                        DisplaySharingTable();
-                        ComputeFinalTable();
-                        DisplayFinalTable();
-                        DisplayRouterRoutingTables();
+                       
                         break;
                     case "3":
                         SendMessage();
@@ -58,13 +54,8 @@ namespace DVR
                         AddEdge();
                         break;
                     case "6":
+                        routersNumber++;
                         AddRouter();
-                        DisplayDistVia();
-                        InitSharingTable();
-                        DisplaySharingTable();
-                        ComputeFinalTable();
-                        DisplayFinalTable();
-                        DisplayRouterRoutingTables();
                         break;
                     case "7":
                         DisplayDistVia();
@@ -293,10 +284,8 @@ namespace DVR
             Router newRouter = new Router(networkRouters);
             newRouter.id = rnd.Next(90) + 10;
             networkRouters.Add(newRouter);
-            routersNumber++;
-            edges[routersNumber, 0] = newRouter.id;
-            edges[0, routersNumber] = newRouter.id;
-            DisplayEdges();
+            UpdateEdgeTable();
+            InitVia();
         }
 
         private void RemoveRouter()
@@ -315,11 +304,19 @@ namespace DVR
                 edges[CoordinatesOfElement(routerToBeRemovedId).Item2, i] = 0;
                 edges[i, CoordinatesOfElement(routerToBeRemovedId).Item2] = 0;
             }
+            UpdateEdgeTable();
+            InitVia();
 
             DisplayEdges();
 
 
 
+        }
+
+        private void UpdateEdgeTable()
+        {
+            edges[0, routersNumber] = networkRouters[routersNumber - 1].id;
+            edges[routersNumber, 0] = networkRouters[routersNumber - 1].id;
         }
 
         private void InitialeEdgeTabel()
