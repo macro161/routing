@@ -82,6 +82,10 @@ namespace DVR
 
         public void SendToRandom(Message message)
         {
+            Random rnd = new Random();
+
+            int recieversIndex = rnd.Next(networkRouters.Count);
+            networkRouters[rnd.Next(networkRouters.Count)].SendMessage(message);
 
         }
 
