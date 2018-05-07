@@ -290,16 +290,16 @@ namespace DVR
 
         private void RemoveRouter()
         {
-            DisplayNetworkRouters();
+            //DisplayNetworkRouters();
             Console.WriteLine();
-            DisplayEdges();
+            //DisplayEdges();
             Console.WriteLine();
             Console.WriteLine("Which router you want to remove: ");
             Console.WriteLine();
 
             int routerToBeRemovedId = Int32.Parse(Console.ReadLine());
 
-            for (int i = 1; i <= routersNumber; i++)
+            /*for (int i = 1; i <= routersNumber; i++)
             {
                 edges[CoordinatesOfElement(routerToBeRemovedId).Item2, i] = 0;
                 edges[i, CoordinatesOfElement(routerToBeRemovedId).Item2] = 0;
@@ -307,10 +307,14 @@ namespace DVR
             UpdateEdgeTable();
             InitVia();
 
-            DisplayEdges();
+            DisplayEdges();*/
 
+            Console.WriteLine(CoordinatesOfElement(routerToBeRemovedId).Item2 +  " here");
 
-
+            networkRouters.RemoveAt(CoordinatesOfElement(routerToBeRemovedId).Item2 - 1);
+            routersNumber--;
+            UpdateEdgeTable();
+            InitVia();
         }
 
         private void UpdateEdgeTable()

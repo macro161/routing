@@ -25,7 +25,7 @@ namespace DVR
 
             for (int i = 0; i < routersCount; i++)
             {
-                for (int j = 0; j < routersCount ; j++ )
+                for (int j = 0; j < 3 ; j++ )
                 {
                     Console.Write(routingTable[i,j] + "\t");
                 }
